@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from "react-router";
-import logo from '../assets/logo.png'; // כאן תכניסי את שם הקובץ שלך
+import logo from '../assets/logo.png';
+import circleImage from '../assets/circle-image.png'; // התמונה של העיגול
 
 interface NavItem {
   label: string;
@@ -15,31 +16,37 @@ const navItems: NavItem[] = [
 
 const Header = () => {
   return (
-    <nav style={sidebarStyle}>
-      {/* לוגו */}
-      <div style={logoContainerStyle}>
-        <img src={logo} alt="לוגו" style={logoStyle} />
-      </div>
+    <>
+      {/* העיגול הקבוע */}
+      {/* <div style={fixedCircleStyle}>
+        <img src={circleImage} alt="מד" style={circleImgStyle} />
+      </div> */}
 
-      {/* רשימת ניווט */}
-      <ul style={ulStyle}>
-        {navItems.map((item) => (
-          <li key={item.path} style={liStyle}>
-            <NavLink
-              to={item.path}
-              style={linkStyle}
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
-              {item.label}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      {/* הניווט */}
+      <nav style={sidebarStyle}>
+        <div style={logoContainerStyle}>
+          <img src={logo} alt="לוגו" style={logoStyle} />
+        </div>
+
+        <ul style={ulStyle}>
+          {navItems.map((item) => (
+            <li key={item.path} style={liStyle}>
+              <NavLink
+                to={item.path}
+                style={linkStyle}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 }
 
-// סטיילים
+// סטיילים הקיימים
 const sidebarStyle: React.CSSProperties = {
   position: "fixed",
   right: 0,
@@ -55,35 +62,37 @@ const sidebarStyle: React.CSSProperties = {
   alignItems: "center",
 };
 
-const logoContainerStyle: React.CSSProperties = {
-  marginBottom: "30px",
-};
-
-const logoStyle: React.CSSProperties = {
-  width: "150px", // אפשר לשנות את הגודל כרצונך
-  height: "auto",
-};
-
-const ulStyle: React.CSSProperties = {
-  listStyle: "none",
-  padding: 0,
-  margin: 0,
-  width: "100%",
-};
-
-const liStyle: React.CSSProperties = {
-  marginBottom: "15px",
- 
-};
-
+const logoContainerStyle: React.CSSProperties = { marginBottom: "30px" };
+const logoStyle: React.CSSProperties = { width: "150px", height: "auto" };
+const ulStyle: React.CSSProperties = { listStyle: "none", padding: 0, margin: 0, width: "100%" };
+const liStyle: React.CSSProperties = { marginBottom: "15px" };
 const linkStyle: React.CSSProperties = {
   color: "black",
   textDecoration: "none",
   fontWeight: 100,
   display: "block",
   textAlign: "center",
-   fontFamily: 'Baloo 2, cursive',
-   fontSize: '18px',
+  fontFamily: 'Baloo 2, cursive',
+  fontSize: '18px',
 };
 
-export default Header
+// סטיילים לעיגול הקבוע
+const fixedCircleStyle: React.CSSProperties = {
+  position: "fixed",
+  top: "10px",
+  left: "10px",
+  width: "60px",
+  height: "60px",
+  borderRadius: "50%",
+  overflow: "hidden",
+  zIndex: 1000, // תמיד מעל תוכן
+  border: "2px solid #000", // אופציונלי, מסגרת סביב העיגול
+};
+
+const circleImgStyle: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+};
+
+export default Header;
